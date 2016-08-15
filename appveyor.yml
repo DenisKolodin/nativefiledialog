@@ -1,0 +1,17 @@
+environment:
+  matrix:
+  - TARGET: x86_64-pc-windows-gnu
+    MSYS_BITS: 64
+    NFD_CONFIG: release_x64
+  - TARGET: i686-pc-windows-gnu
+    MSYS_BITS: 32
+    NFD_CONFIG: release_x86
+
+install:
+    - if defined MSYS_BITS set PATH=C:\msys64\mingw%MSYS_BITS%\bin;C:\msys64\usr\bin;%PATH%
+
+build: false
+
+test_script:
+    - cd build/gmake_windows/
+    - make config=%NFD_CONFIG%
